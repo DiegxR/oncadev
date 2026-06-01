@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-// @ts-expect-error - vanta has no types
 import BIRDS from "vanta/src/vanta.birds";
 
 type VantaBirdsProps = {

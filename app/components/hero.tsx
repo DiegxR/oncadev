@@ -6,7 +6,6 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 const words = ["Escalables", "Eficientes", "Adaptables", "Robustas"];
-const heroBgImage = "/oncabg.png";
 
 export function Hero() {
   const [currentWord, setCurrentWord] = useState(0);
@@ -64,27 +63,11 @@ export function Hero() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [isHoverDevice]);
 
-
-
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-stone-950"
+      className="relative min-h-screen overflow-hidden bg-transparent"
     >
-      {/* Imagen de fondo optimizada con Next.js Image */}
-      <div className="absolute  inset-0 z-0">
-        <Image
-          src={heroBgImage}
-          alt=""
-          fill
-          priority
-          className="object-cover  animate-pulse  [animation-duration:5s]"
-          sizes="100vw"
-          quality={80}
-        />
-        <div className="absolute inset-0" />
-      </div>
-
       {/* Radial gradient - desktop: absolute sigue mouse | mobile: fixed sigue viewport */}
       {isHoverDevice ? (
         <div
@@ -159,7 +142,7 @@ export function Hero() {
                       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                       exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
                       transition={{ duration: 0.8 }}
-                      className=" bg-gradient-to-r ml-[-38px]  rounded-full backdrop-blur-2xl px-10 from-emerald-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent"
+                      className="bg-gradient-to-r ml-[-38px] rounded-full backdrop-blur-2xl px-10 from-emerald-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent"
                     >
                       {words[currentWord]}
                     </motion.span>
@@ -204,9 +187,11 @@ export function Hero() {
               alt="OncaLogo"
               width={200}
               height={200}
+              priority
+              quality={85}
               className="mb-[-70px] mr-[-12px]"
             />
-            <span className="bg-gradient-to-r  from-emerald-700 to-teal-900 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-700 to-teal-900 bg-clip-text text-transparent">
               Onca
             </span>
             <span className="text-white lg:mt-[-40px]">

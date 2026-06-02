@@ -13,7 +13,16 @@ export default function VantaBackground({ children }: VantaBackgroundProps) {
   const vantaEffect = useRef<any>(null);
 
   useEffect(() => {
-    if (!vantaEffect.current && vantaRef.current) {
+    if (vantaRef.current) {
+      // Destroy any existing effect first
+      if (vantaEffect.current) {
+        try {
+          vantaEffect.current.destroy();
+        } catch (e) {
+          // ignore
+        }
+      }
+      // Create new effect
       vantaEffect.current = NET({
         el: vantaRef.current,
         THREE: THREE,
@@ -26,7 +35,7 @@ export default function VantaBackground({ children }: VantaBackgroundProps) {
         scaleMobile: 1.0,
         color: 0x12a00a,
         backgroundColor: 0x0a0a0a,
-        points: 5.0,
+        points: 10.0,
         maxDistance: 20.0,
         spacing: 19.0,
         showDots: true,
@@ -34,14 +43,21 @@ export default function VantaBackground({ children }: VantaBackgroundProps) {
     }
 
     return () => {
-      if (vantaEffect.current) vantaEffect.current.destroy();
+      if (vantaEffect.current) {
+        try {
+          vantaEffect.current.destroy();
+        } catch (e) {
+          // ignore
+        }
+        vantaEffect.current = null;
+      }
     };
   }, []);
 
   return (
     <div
       ref={vantaRef}
-      className="absolute inset-0 z-0 bg-transparent w-full h-full"
+      className="absolute inset-0 z-0 w-[100vw] h-full"
     >
       {children}
     </div>

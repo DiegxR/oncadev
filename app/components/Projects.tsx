@@ -9,7 +9,7 @@ export function Projects() {
   return (
     <section id="projects" className="relative py-20 px-4 md:px-8 lg:px-16 overflow-hidden">
       <VantaBackground />
-      <div className="pointer-events-none absolute inset-0 bg-[#131110] mix-blend-screen" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b  from-[#1b1917] to-[#0C0A0A]/30" />
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Proyectos</h2>

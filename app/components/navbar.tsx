@@ -43,6 +43,8 @@ export function Navbar() {
             alt="OncaLogo"
             width={60}
             height={60}
+            priority
+            quality={85}
           />
           <span className="bg-gradient-to-r opacity-90 from-emerald-400 to-teal-400 bg-clip-text text-transparent">
             Onca

@@ -63,12 +63,12 @@ export function Process() {
   return (
     <section
       id="process"
-      className="py-32 relative overflow-hidden bg-linear-to-b from-stone-950 via-stone-950/95 to-stone-900"
+      className="py-32 relative overflow-hidden bg-gradient-to-b from-stone-950 via-stone-950/95 to-stone-900"
       ref={containerRef}
     >
       <Particles />
-      <div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-stone-950 to-transparent pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-stone-900/80 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-stone-950 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-stone-900/80 to-transparent pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -93,7 +93,7 @@ export function Process() {
           {/* Animated vertical line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-px bg-stone-800">
             <motion.div
-              className="absolute top-0 left-0 w-full bg-linear-to-b from-emerald-500 via-teal-500 to-emerald-500"
+              className="absolute top-0 left-0 w-full bg-gradient-to-b from-emerald-500 via-teal-500 to-emerald-500"
               style={{ height: lineHeight }}
             />
             <motion.div
@@ -140,7 +140,7 @@ export function Process() {
 
                 {/* Center icon */}
                 <div className="relative z-10 shrink-0">
-                  <div className="w-16 h-16 rounded-full bg-linear-to-br from-emerald-600 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25">
                     <step.icon className="w-7 h-7 text-stone-50" />
                   </div>
                 </div>

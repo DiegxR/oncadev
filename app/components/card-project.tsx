@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ExternalLink } from "lucide-react";
+import type { Project } from "../lib/types";
 
 interface ProjectDetail {
   images: string[];
@@ -13,13 +14,6 @@ interface ProjectDetail {
   tag: string;
 }
 
-interface Project {
-  name: string;
-  description: string;
-  details: ProjectDetail[];
-  tags: string[];
-}
-
 interface CardProjectProps {
   project: Project;
   projectIndex: number;
@@ -28,7 +22,7 @@ interface CardProjectProps {
 export function CardProject({ project, projectIndex }: CardProjectProps) {
   const router = useRouter();
 
-  const firstImage = project.details.flatMap((detail) => detail.images)[0] || "/placeholder.jpg";
+  const firstImage = project.image || project.details.flatMap((detail) => detail.images)[0] || "/placeholder.jpg";
   const projectLink = project.details.find((detail) => detail.link)?.link || "";
   const hasProjectLink = Boolean(projectLink);
 
@@ -47,11 +41,12 @@ export function CardProject({ project, projectIndex }: CardProjectProps) {
           alt={project.name}
           fill
           loading="lazy"
+          quality={80}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
-        <div className="absolute inset-0 bg-linear-to-t from-slate-950/95 via-slate-950/30 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/30 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-50" />
 
         <div className="absolute top-4 right-4 flex gap-2 opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
           {hasProjectLink && (
@@ -106,7 +101,7 @@ export function CardProject({ project, projectIndex }: CardProjectProps) {
       </div>
 
       <div className="absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none">
-        <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-emerald-500/10 via-transparent to-emerald-300/10" />
+        <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-500/10 via-transparent to-emerald-300/10" />
       </div>
     </article>
   );

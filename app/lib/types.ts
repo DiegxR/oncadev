@@ -14,6 +14,7 @@ export interface ProjectDetail {
 
 export interface Project {
   name: string;
+  image: string;
   description: string;
   details: ProjectDetail[];
   tags: string[];

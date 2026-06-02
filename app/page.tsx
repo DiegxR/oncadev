@@ -1,4 +1,5 @@
 import { Suspense, lazy } from "react"
+import Image from "next/image"
 import { Navbar } from "./components/navbar"
 import { Footer } from "./components/footer"
 
@@ -21,7 +22,19 @@ function SectionSkeleton() {
 
 export default function Home() {
   return (
-    <main className="bg-stone-950 transition-all  overflow-x-hidden min-h-screen">
+    <main className="relative transition-all overflow-x-hidden min-h-screen">
+      <div className="fixed inset-0 -z-10">
+        <Image
+          src="/oncabg.png"
+          alt="Fondo continuo"
+          fill
+          priority
+          quality={80}
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-slate-950/15" />
+      </div>
       <Navbar />
       <Suspense fallback={<SectionSkeleton />}>
         <Hero />

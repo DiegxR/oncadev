@@ -9,6 +9,8 @@ import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 import { Card, CardContent } from "../../components/ui/card";
 import { ChevronLeft, ExternalLink, ChevronRight, ChevronDown } from "lucide-react";
+import VantaBackground from "@/components/custom-ui/vanta-background-net";
+import { Particles } from "@/components/custom-ui/Particles";
 
 export default function ProjectDetailPage() {
   const router = useRouter();
@@ -61,13 +63,14 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-stone-950 py-12 px-4 md:px-8">
-      <div className="mx-[5%] md:mx-[10%] lg:mx-[15%]">
+    <div className="min-h-screen relative overflow-hidden bg-stone-950 py-12 px-4 md:px-8">
+      <Particles/>
+      <div className="relative z-10 mx-[5%] md:mx-[10%] lg:mx-[15%]">
         {/* Back button */}
         <Button
           variant="ghost"
           onClick={() => router.back()}
-          className="mb-6 text-stone-400 hover:text-white"
+          className="mb-6 text-stone-400 cursor-pointer hover:text-white"
         >
           <ChevronLeft className="mr-2 h-4 w-4" />
           Volver
@@ -79,7 +82,7 @@ export default function ProjectDetailPage() {
           <p className="text-lg text-stone-400 max-w-3xl">{project.description}</p>
           <div className="flex flex-wrap gap-2 mt-4">
             {project.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="border-emerald-600 text-emerald-200">
+              <Badge key={tag} variant="secondary" className="select-none border-emerald-600 text-emerald-200">
                 {tag}
               </Badge>
             ))}
@@ -96,7 +99,7 @@ export default function ProjectDetailPage() {
               <TabsTrigger
                 key={detail.title}
                 value={detail.title}
-                className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white px-4 py-2"
+                className="data-[state=active]:bg-emerald-600 cursor-pointer data-[state=active]:text-white px-4 py-2"
               >
                 {detail.title}
               </TabsTrigger>
@@ -138,6 +141,9 @@ export default function ProjectDetailPage() {
                     src={detail.images[currentImageIndex]}
                     alt={`${project.name} - ${detail.title} ${currentImageIndex + 1}`}
                     fill
+                    loading="lazy"
+                    quality={85}
+                    sizes="(max-width: 768px) 100vw, 90vw"
                     className="object-cover"
                   />
                   

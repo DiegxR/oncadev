@@ -3,13 +3,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import BIRDS from "vanta/src/vanta.birds";
+import HALO from "vanta/src/vanta.halo";
 
-type VantaBirdsProps = {
+type VantaHaloProps = {
 	backgroundColor?: string | number;
-	color1?: string | number;
-	color2?: string | number;
-	quantity?: number;
 	className?: string;
 	style?: React.CSSProperties;
 };
@@ -25,14 +22,11 @@ function parseColor(input?: string | number): number | undefined {
 	return Number.isNaN(n) ? undefined : n;
 }
 
-export default function VantaBirds({
-	backgroundColor = "#07192F",
-	color1 = "#ff0000",
-	color2 = "#00d1ff",
-	quantity = 4,
+export default function VantaHalo({
+	backgroundColor = 0xb110b,
 	className,
 	style,
-}: VantaBirdsProps) {
+}: VantaHaloProps) {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const instanceRef = useRef<any>(null);
 
@@ -50,26 +44,40 @@ export default function VantaBirds({
 		}
 
 		const el = containerRef.current;
-		if (!el) return;
+		if (el) {
+			// Destroy any existing effect first
+			if (instanceRef.current) {
+				try {
+					instanceRef.current.destroy();
+				} catch (e) {
+					// ignore
+				}
+			}
+			const opts: any = {
+				el,
+				THREE,
+				mouseControls: true,
+				touchControls: true,
+				gyroControls: false,
+				minHeight: 200.0,
+				minWidth: 200.0,
+				baseColor: 0x24c84a,
+				backgroundColor: parseColor(backgroundColor) ?? 0xb110b,
+				amplitudeFactor: 0.6,
+				xOffset: -0.03,
+				size: 0.4,
+			};
 
-		const opts: any = {
-			el,
-			THREE,
-			backgroundColor: parseColor(backgroundColor) ?? 0x07192f,
-			color1: parseColor(color1) ?? 0xff0000,
-			color2: parseColor(color2) ?? 0x00d1ff,
-			quantity: Math.max(2, Math.min(6, Math.floor(quantity))),
-		};
-
-		try {
-			instanceRef.current = BIRDS(opts);
-		} catch (err) {
-			// BIRDS export sometimes registers via VANTA.register and returns instance
 			try {
-				// @ts-ignore
-				instanceRef.current = (window as any).VANTA?.BIRDS?.apply?.(null, [opts]) || (window as any).VANTA?.create?.("BIRDS", opts);
-			} catch {
-				console.error("vanta birds init failed", err);
+				instanceRef.current = HALO(opts);
+			} catch (err) {
+				// HALO export sometimes registers via VANTA.register and returns instance
+				try {
+					// @ts-ignore
+					instanceRef.current = (window as any).VANTA?.HALO?.apply?.(null, [opts]) || (window as any).VANTA?.create?.("HALO", opts);
+				} catch {
+					console.error("vanta halo init failed", err);
+				}
 			}
 		}
 
@@ -83,8 +91,7 @@ export default function VantaBirds({
 				instanceRef.current = null;
 			}
 		};
-	}, [backgroundColor, color1, color2, quantity]);
+	}, [backgroundColor]);
 
 	return <div ref={containerRef} className={className} style={Object.assign({ position: "absolute", inset: 0 }, style)} />;
 }
-

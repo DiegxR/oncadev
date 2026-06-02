@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Mail, MapPin, Phone } from "lucide-react"
-import { Particles } from "./custom-ui/Particles"
+import VantaHalo from "./custom-ui/vanta-halo"
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -50,7 +50,8 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-32 bg-stone-950 relative overflow-hidden">
-      <div className="absolute inset-0 bg-linear-to-b from-stone-950/90 via-stone-950/30 to-transparent pointer-events-none" />
+      <VantaHalo />
+      <div className="absolute inset-0 bg-gradient-to-b from-stone-950/90 via-stone-950/30 to-transparent pointer-events-none" />
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -85,7 +86,7 @@ export function Contact() {
               </div>
               <div>
                 <h4 className="text-stone-50 font-medium mb-1">Correo</h4>
-                <p className="text-stone-400">juandiegorojasarredondo@gmail.com</p>
+                <p className="text-stone-400">oncadev.co@gmail.com</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -167,7 +168,7 @@ export function Contact() {
             </div>
             <button
               type="submit"
-              className="w-full px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 rounded-xl text-stone-50 font-medium hover:opacity-90 transition-opacity"
+              className="w-full px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl text-stone-50 font-medium hover:opacity-90 transition-opacity"
             >
               Enviar por WhatsApp
             </button>

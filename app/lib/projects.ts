@@ -3,6 +3,7 @@ import { Project } from "./types";
 export const projectsArray: Project[] = [
   {
     name: "Portafolio Personal",
+    image: "https://drive.google.com/uc?id=1KaLZa6l505TayQYyTx4F1R1o8xS2mIdj",
     description:"Este fue mi primer portafolio personal donde quise experimentar la integración de modelos 3D con Three Js y la dinamica de una página web interactiva, experimentando nuevas tecnologías y formas de ver las páginas web",
     details: [
       {images: [
@@ -28,6 +29,7 @@ export const projectsArray: Project[] = [
   },
   {
     name: "Blooma io",
+    image: "https://drive.google.com/uc?id=1nRSDYp8b3XlIeE0hFpqN5nUHGqLIPt98",
     description:
       "Gestor de proyectos de diseño y desarrollo tanto para empresas como para freelance donde encontrarás todo lo necesario para tus trabajos, proyectos y ofertas",
     details: [
@@ -91,6 +93,7 @@ export const projectsArray: Project[] = [
   },
   {
     name: "LatamVerify",
+    image: "https://drive.google.com/uc?id=1jtrzmSKeHpDzImbgXCHedR9ZC1JTuGCe",
     description:
       "Plataforma para consulta de antecedentes y diferentes reportes de más de 16 países en Latam",
     details: [
@@ -134,10 +137,11 @@ export const projectsArray: Project[] = [
         tag: "FrontEnd",
       },
     ],
-    tags: ["FrontEnd"],
+    tags: ["FrontEnd", "BackEnd"],
   },
   {
     name: "Arbol y Miel",
+    image: "https://drive.google.com/uc?id=1wwkvsi4MLXuxz5aAEeF3AmjbigxlI45d",
     description:
       "Arbol y Miel es una iniciativa de una productora de Miel que busca hacer seguimiento a cada una de las colonias a través de códigos qrs",
     details: [
@@ -209,6 +213,7 @@ export const projectsArray: Project[] = [
 
   {
     name: "Jooci Gps",
+    image: "https://drive.google.com/uc?id=1j2nOFYqUU31c4QRXXZbQ3qy_reauNoZP",
     description:
       "Plataforma de software web para seguimiento y control de dispositivos gps vinculados a vehículos",
     details: [

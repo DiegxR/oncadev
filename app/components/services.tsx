@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Globe, Smartphone, Cloud, Database, Brain } from "lucide-react";
-import VantaBackground from "./custom-ui/vanta-background-net";
 
 const services = [
   {
@@ -37,12 +37,94 @@ const services = [
   },
 ];
 export function Services() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHoverDevice, setIsHoverDevice] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover)");
+    if (!mediaQuery.matches) {
+      setIsHoverDevice(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isHoverDevice) return;
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHoverDevice]);
+
+  useEffect(() => {
+    if (!isHoverDevice) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [isHoverDevice]);
+
   return (
     <section
       id="services"
-      className="py-32 z-10 bg-stone-950 relative overflow-hidden"
+      ref={containerRef}
+      className="py-32 z-10 bg-transparent relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      {isHoverDevice ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 blur-2xl"
+          style={{
+            background: `radial-gradient(circle 50rem at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 32%, rgba(15,23,42,0.95) 38%, black 100%)`,
+          }}
+        />
+      ) : (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 blur-2xl"
+          style={{
+            background: `radial-gradient(circle 50rem at 50% calc(35% + ${scrollY}px), transparent 0%, transparent 28%, rgba(15,23,42,0.95) 38%, black 100%)`,
+          }}
+        />
+      )}
+
+      {/* Glow animado - sigue mouse en desktop, animación automática en mobile */}
+      {isHoverDevice ? (
+        <motion.div
+          className="pointer-events-none absolute w-96 h-96 rounded-full opacity-30 blur-3xl"
+          animate={{ x: mousePosition.x - 192, y: mousePosition.y - 192 }}
+          transition={{ type: "spring", stiffness: 120, damping: 24 }}
+        />
+      ) : (
+        <motion.div
+          className="pointer-events-none absolute w-96 h-96 rounded-full opacity-30 blur-3xl"
+          animate={{
+            x: [0, 100, -50, 0],
+            y: [0, -30, 50, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-[#0C0A08]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
